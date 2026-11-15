@@ -163,3 +163,54 @@ Olist — бразильский маркетплейс, который прив
 ```
 
 SQL использовался для подготовки данных и расчёта метрик, Python — для статистического сравнения каналов и визуализации результатов.
+
+
+## 8. Воспроизведение анализа
+
+### SQL
+
+Расчёты выполнены в PostgreSQL с использованием DBeaver.
+
+Для воспроизведения анализа необходимо:
+
+1. Скачать исходные датасеты [Marketing Funnel by Olist](https://www.kaggle.com/datasets/olistbr/marketing-funnel-olist) и [Brazilian E-Commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).
+2. Создать базу данных PostgreSQL и импортировать CSV-файлы в таблицы `marketing_qualified_leads`, `closed_deals`, `orders` и `order_items`.
+3. Проверить типы столбцов: даты должны иметь тип `date` или `timestamp`, цены — числовой тип.
+4. Выполнить SQL-запросы из папки `SQL/` в следующем порядке:
+   - `01_data_quality.sql` — проверка данных;
+   - `02_funnel.sql` — анализ конверсии в договор;
+   - `03_activation.sql` — анализ активации;
+   - `04_channel_performance.sql` — анализ GMV и эффективности каналов.
+
+Результаты итоговых запросов можно экспортировать в CSV для дальнейшей визуализации.
+
+### Python
+
+Ноутбуки находятся в папке `notebooks/`:
+
+- `conversion_statistics.ipynb` — статистическое сравнение конверсий каналов;
+- `visualizations.ipynb` — построение графиков.
+
+Для работы с ноутбуками рекомендуется использовать [Google Colab](https://colab.research.google.com/). Необходимо загрузить соответствующий `.ipynb` и CSV-файлы с результатами SQL-запросов.
+
+При запуске в Colab после загрузки файлов в `/content/` пути к CSV имеют вид:
+
+```python
+pd.read_csv("/content/channel_metrics.csv")
+pd.read_csv("/content/seller_concentration.csv")
+```
+
+При локальном запуске Jupyter Notebook пути необходимо изменить в соответствии с расположением файлов. Например, при запуске из папки `notebooks/` и хранении CSV в `data/`:
+
+```python
+pd.read_csv("../data/channel_metrics.csv")
+pd.read_csv("../data/seller_concentration.csv")
+```
+
+Для установки библиотек используется файл `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Готовые визуализации сохранены в папке `figures/`.
