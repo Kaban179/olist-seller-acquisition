@@ -1,0 +1,10 @@
+"origin","total_gmv","top1_gmv","top1_share_pct","top3_share_pct"
+unknown,27642,15418,55.78,81.29
+paid_search,11353,2496,21.99,53.56
+organic_search,6558,654,9.97,25.47
+referral,3867,2288,59.17,86.71
+direct_traffic,1491,598,40.11,70.36
+social,1139,984,86.39,97.45
+email,144,144,100.00,100.00
+display,0,0,,
+other,0,0,,
